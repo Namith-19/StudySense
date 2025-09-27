@@ -1,9 +1,9 @@
 import streamlit as st
 import base64
 
-st.set_page_config(page_title="PDF Viewer", layout="wide")
+st.set_page_config(page_title="StudySense", layout="wide")
 
-# st.title("📄 Simple PDF Viewer in Streamlit")
+st.title("StudySense")
 
 # Upload a PDF file
 pdf_file = st.file_uploader("Choose a PDF file", type="pdf")
