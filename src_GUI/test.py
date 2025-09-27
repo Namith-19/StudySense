@@ -42,9 +42,9 @@ st.set_page_config(page_title="PDF Viewer", layout="wide")
 
 animated_title()
 
-# st.markdown("<hr class='divider-thick'></hr>", unsafe_allow_html=True)
+st.markdown("<hr class='divider-thick'></hr>", unsafe_allow_html=True)
 
-st.write("---")
+# st.write("---")
 
 
 
