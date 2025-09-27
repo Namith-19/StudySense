@@ -1,23 +1,26 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
 
+st.markdown(
+    """
+    <style>
+    .divider-thick {
+        border: none;
+        height: 100px;
+        background-color: #2196F3;
+        margin: 20px 0;
+        border-radius: 4px;
+    }
+    .divider-thin {
+        border: none;
+        height: 1px;
+        background-color: #999;
+        margin: 10px 0;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-# entry=st.text_input("Name: ", key="Name")
-
-# x = st.button("Submit Name")  # 👈 this is a widget 
-
-# st.write(st.session_state.Name)
-
-
-
-df = pd.DataFrame({
-    'first column': [1, 2, 3, 4],
-    'second column': [10, 20, 30, 40]
-    })
-
-option = st.selectbox(
-    'Which number do you like best?',
-     df['second column'])
-
-'You selected: ', option
+st.write("Above custom divider")
+st.markdown("<hr class='divider-thick'>", unsafe_allow_html=True)
+st.write("Below custom divider")
