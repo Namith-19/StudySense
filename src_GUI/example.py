@@ -76,3 +76,4 @@ elif choice == "📊 Dashboard":
     st.line_chart({"Happy": [5, 10, 15, 20, 10],
                    "Sad": [1, 2, 2, 3, 4],
                    "Neutral": [3, 5, 7, 6, 8]})
+    
