@@ -46,7 +46,7 @@ st.markdown("""
     height: 80vh;
 }
 .privacy-box {
-    background-color: #fff;
+    background-color: #363434;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -56,7 +56,10 @@ st.markdown("""
 
 # ---- LOGIN PAGE ----
 def login_page():
-    st.markdown("<h1 style='text-align:center;'>🔐 StudySense Login</h1>", unsafe_allow_html=True)
+    st.markdown("""<h1 style='text-align:center;'>StudySense</h1>
+                <br>
+                <h2 style='text-align:center;'>Login</h2>
+                """, unsafe_allow_html=True)
     with st.container():
         with st.form("login_form", clear_on_submit=False):
             username = st.text_input("Username")
@@ -74,7 +77,7 @@ def login_page():
 
 # ---- HOME PAGE ----
 def home_page():
-    st.title("🏠 StudySense Home")
+    st.title("🏠Home")
     st.write("Welcome to StudySense! Choose an option below:")
     col1, col2 = st.columns(2)
     with col1:
@@ -106,10 +109,20 @@ def study_mode_page():
         st.markdown("### ⚠️ Privacy Notice")
         st.markdown("""
         <div class="privacy-box">
-        <p>By enabling StudySense Mode, you allow the application to monitor study-related data 
-        and personalize focus tracking, alerts, and break recommendations.</p>
-        <p>Your data is processed locally and never stored externally.</p>
+            <p>
+                 <strong>Privacy Notice:</strong> Enabling <em>StudySense Mode</em> activates intelligent focus tracking and study pattern analysis. 
+                    The system uses on-device processing to monitor visual cues, engagement levels, and productivity metrics in real time.
+            </p>
+            <p>
+                All data is analyzed <strong>locally</strong> on your device — no information is uploaded, shared, or stored on external servers. 
+                Your privacy and study environment remain completely secure and confidential.
+            </p>
+            <p>
+                You can disable StudySense Mode anytime from the settings panel. 
+                By enabling it, you consent to local analysis solely for improving your focus and learning experience.
+            </p>
         </div>
+
         """, unsafe_allow_html=True)
 
         agree = st.checkbox("I have read and agree to the above terms.")
