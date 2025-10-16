@@ -9,7 +9,7 @@ app = FastAPI(title="Emotion Detection API (Demo)", version="1.0")
 
 @app.get("/")
 def root():
-    return {"message": "Welcome to the Demo Emotion Detection API 🚀"}
+    return {"message": "Welcome to the Demo Emotion Detection API "}
 
 @app.post("/predict/")
 async def predict(file: UploadFile = File(...)):
