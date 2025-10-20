@@ -1,0 +1,56 @@
+version: "3.8"
+services:
+streamlit:
+build: ./streamlit
+container_name: studysense_streamlit
+ports:
+- "8501:8501"
+environment:
+- REDIS_HOST=redis
+- INFERENCE_HOST=inference
+- MYSQL_HOST=mysql
+- MYSQL_USER=root
+- MYSQL_PASSWORD=${MYSQL_ROOT_PASSWORD}
+- MYSQL_DB=studysense
+depends_on:
+- redis
+- inference
+- mysql
+volumes:
+- ./streamlit:/app
+
+
+inference:
+build: ./inference
+container_name: studysense_inference
+ports:
+- "8000:8000"
+environment:
+- REDIS_HOST=redis
+- MODEL_PATH=/models/emotion_model.tflite
+volumes:
+- ./inference:/app
+
+
+redis:
+image: redis:7
+container_name: studysense_redis
+ports:
+- "6379:6379"
+
+
+mysql:
+image: mysql:8.0
+container_name: studysense_mysql
+environment:
+MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+MYSQL_DATABASE: studysense
+ports:
+- "3306:3306"
+volumes:
+- mysql_data:/var/lib/mysql
+- ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+
+volumes:
+mysql_data:
