@@ -1,0 +1,11 @@
+streamlit
+streamlit-webrtc
+opencv-python-headless
+numpy
+requests
+plotly
+mysql-connector-python
+bcrypt
+python-dotenv
+streamlit-autorefresh
+

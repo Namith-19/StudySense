@@ -1,0 +1,53 @@
+/* V2/application/ui/assets/style.css */
+/* Simple dark pastel theme (non-invasive) */
+
+:root {
+  --bg: #0e1117;
+  --panel: #1a1e25;
+  --muted: #9aa6b2;
+  --accent: #7E8CE0;
+  --accent-2: #A3BE8C;
+  --text: #ECEFF4;
+}
+
+body, .stApp, .css-1v3fvcr {
+  background-color: var(--bg) !important;
+  color: var(--text) !important;
+  font-family: "Inter", sans-serif;
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+  background-color: var(--panel) !important;
+  color: var(--text) !important;
+}
+
+/* Buttons */
+div.stButton > button {
+  background-color: #2C2C2C;
+  color: var(--text);
+  border-radius: 8px;
+  border: 1px solid #2C2C2C;
+  padding: 6px 12px;
+}
+div.stButton > button:hover {
+  background-color: rgba(126,140,224,0.12) !important;
+  border: 1px solid var(--accent) !important;
+}
+
+/* Cards */
+.stCard, .card {
+  background: var(--panel) !important;
+  border-radius: 10px;
+  padding: 12px;
+}
+
+/* Headings accent */
+h1, h2, h3 {
+  color: var(--accent);
+}
+
+/* Metrics & small text */
+[data-testid="stMetricValue"] {
+  color: var(--accent-2) !important;
+}

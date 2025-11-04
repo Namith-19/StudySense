@@ -1,2 +1,4 @@
 Data/
 test_images/
+.env
+*.zip   

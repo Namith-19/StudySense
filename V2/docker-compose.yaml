@@ -1,0 +1,80 @@
+# V2/docker-compose.yaml
+version: "3.8"
+
+services:
+  application:
+    build:
+      context: ./application
+      dockerfile: Dockerfile
+    container_name: studysense_application
+    ports:
+      - "8501:8501"
+      - "8080:8000"   # Streamlit default
+    environment:
+      - INFERENCE_HOST=inference
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DB=${MYSQL_DATABASE}
+    depends_on:
+      - inference
+      - mysql
+      - redis
+    devices:
+      - "/dev/video0:/dev/video0"
+
+    volumes:
+      - ./application:/app
+    restart: unless-stopped
+
+  inference:
+    build:
+      context: ./inference
+      dockerfile: Dockerfile
+    container_name: studysense_inference
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_HOST=redis
+      - MODEL_PATH=/models/emotion_model.tflite
+    depends_on:
+      - redis
+      - mysql
+    volumes:
+      - ./inference:/app
+    restart: unless-stopped
+
+  redis:
+    image: redis:7
+    container_name: studysense_redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mysql:
+    image: mysql:8.0
+    container_name: studysense_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mysql_data:
