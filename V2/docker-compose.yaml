@@ -27,22 +27,22 @@ services:
       - ./application:/app
     restart: unless-stopped
 
+
   inference:
     build:
       context: ./inference
       dockerfile: Dockerfile
-    container_name: studysense_inference
+    image: v2-inference
     ports:
       - "8000:8000"
     environment:
-      - REDIS_HOST=redis
-      - MODEL_PATH=/models/emotion_model.tflite
+      - MODEL_PATH=/app/model/fer_mobilenetv3_small.h5
+    volumes:
+      - /home/namithk/Documents/code/studysense/V2/inference:/app/model:ro
+    restart: unless-stopped
     depends_on:
       - redis
       - mysql
-    volumes:
-      - ./inference:/app
-    restart: unless-stopped
 
   redis:
     image: redis:7
